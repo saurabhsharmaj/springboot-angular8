@@ -55,7 +55,7 @@ public class Metrics {
 	public String getValue(String key) throws Exception {
 		AttributeList list = mbs.getAttributes(name, new String[] { key });
 		Object val = Optional.ofNullable(list).map(l -> l.isEmpty() ? null : l).map(List::iterator).map(Iterator::next)
-				.map(Attribute.class::cast).map(Attribute::getValue).map(String.class::cast).orElse(null);
+				.map(Attribute.class::cast).map(Attribute::getValue).map(Object.class::cast).orElse(null);
 		return String.valueOf(val);
 	}
 	
