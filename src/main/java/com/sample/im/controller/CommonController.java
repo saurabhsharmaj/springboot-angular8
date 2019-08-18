@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sample.im.common.Metrics;
 import com.sample.im.common.IMUtils;
-import com.sample.im.model.Feature;
 import com.sample.im.model.value.BasicInfo;
 import com.sample.im.repository.FeatureRepository;
 
@@ -18,6 +18,9 @@ public class CommonController {
 
 	@Autowired
 	IMUtils utils;
+	
+	@Autowired
+	Metrics cpuMetrics;
 	
 	@Autowired
 	private FeatureRepository featureRepository;
@@ -51,5 +54,15 @@ public class CommonController {
 	@GetMapping(path = {"/ip"})
 	public ResponseEntity<String> getIpAddress() throws Exception{
 		return new ResponseEntity<String>(utils.getIpAddress(),HttpStatus.OK);
+	}
+	
+	@GetMapping(path = {"/cpuload"})
+	public ResponseEntity<Double> getCPULoad() {
+		return new ResponseEntity<Double>(cpuMetrics.getProcessCpuLoad(),HttpStatus.OK);
+	}
+	
+	@GetMapping(path = {"/memory"})
+	public ResponseEntity<Double> getMemoryLoad() {
+		return new ResponseEntity<Double>(cpuMetrics.getMemory(),HttpStatus.OK);
 	}
 }
