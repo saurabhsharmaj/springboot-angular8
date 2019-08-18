@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ public class CommonController {
 	IMUtils utils;
 	
 	@Autowired
-	Metrics cpuMetrics;
+	Metrics metrics;
 	
 	@Autowired
 	private FeatureRepository featureRepository;
@@ -33,6 +34,18 @@ public class CommonController {
 		bs.setOs(utils.getOS());
 		bs.setArch(utils.getArchType());
 		bs.setFeature(featureRepository.findAll());
+		bs.setFreePhysicalMemorySize(metrics.getValue("FreePhysicalMemorySize"));		  
+		bs.setFreeSwapSpaceSize(metrics.getValue("FreeSwapSpaceSize"));		  
+		bs.setProcessCpuTime(metrics.getValue("ProcessCpuTime"));		 
+		bs.setSystemCpuLoad(metrics.getValue("SystemCpuLoad"));		  
+		bs.setTotalPhysicalMemorySize(metrics.getValue("TotalPhysicalMemorySize"));		  
+		bs.setTotalSwapSpaceSize(metrics.getValue("TotalSwapSpaceSize"));
+		bs.setProcessCpuLoad(metrics.getValue("ProcessCpuLoad"));		  
+		bs.setName(metrics.getValue("Name"));		  
+		bs.setVersion(metrics.getValue("Version"));		  
+		bs.setAvailableProcessors(metrics.getValue("AvailableProcessors"));		  
+		bs.setSystemLoadAverage(metrics.getValue("SystemLoadAverage"));
+		
 		return new ResponseEntity<BasicInfo>(bs,HttpStatus.OK);
 	}
 	
@@ -58,11 +71,11 @@ public class CommonController {
 	
 	@GetMapping(path = {"/cpuload"})
 	public ResponseEntity<Double> getCPULoad() {
-		return new ResponseEntity<Double>(cpuMetrics.getProcessCpuLoad(),HttpStatus.OK);
+		return new ResponseEntity<Double>(metrics.getProcessCpuLoad(),HttpStatus.OK);
 	}
 	
-	@GetMapping(path = {"/memory"})
-	public ResponseEntity<Double> getMemoryLoad() {
-		return new ResponseEntity<Double>(cpuMetrics.getMemory(),HttpStatus.OK);
+	@GetMapping(path = {"/metric/{key}"})
+	public ResponseEntity<Object> getMemoryLoad(@PathVariable String key) throws Exception {
+		return new ResponseEntity<Object>(metrics.getValue(key),HttpStatus.OK);
 	}
 }

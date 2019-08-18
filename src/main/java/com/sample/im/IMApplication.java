@@ -14,7 +14,13 @@ public class IMApplication extends SpringBootServletInitializer {
     }
 
 	public static void main(String[] args) {
+		
 		SpringApplication.run(IMApplication.class, args);
+		
+//		  Config config = new Config(); 
+//		 config.setConfigId(new ConfigKey("a", "b"));
+//		  System.out.println(new Gson().toJson(config));
+		 
 	}
 
 	/*
