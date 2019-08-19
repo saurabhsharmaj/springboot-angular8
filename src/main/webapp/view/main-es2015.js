@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = " <nav class=\"navbar navbar-expand-sm bg-primary navbar-dark\">\n  <!-- Links -->\n  <ul class=\"navbar-nav\">\n    <li class=\"nav-item\">\n        <a routerLink=\"contacts\" class=\"nav-link\" routerLinkActive=\"active\">Contact List</a>\n    </li>\n    <li class=\"nav-item\">\n        <a routerLink=\"add\" class=\"nav-link\" routerLinkActive=\"active\">Add Contact</a>\n    </li>\n  </ul>\n</nav>\n<div class=\"container\">\n  <br>\n  <h2 style=\"text-align: center;\">{{title}}</h2>\n  <hr>  \n  <div class=\"card\">\n    <div class=\"card-body\">\n  <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>\n\n<footer class=\"footer\">\n  <div class=\"container\">\n      <span>(https://www.javaguides.net/2019/06/angular-8-crud-example-tutorial.html)</span>\n  </div>\n</footer>\n"
+module.exports = " <nav class=\"navbar navbar-expand-sm bg-primary navbar-dark\">\n  <!-- Links -->\n  <ul class=\"navbar-nav\">\n      <li class=\"nav-item\">\n          <a routerLink=\"imconfigs\" class=\"nav-link\" routerLinkActive=\"active\">IM</a>\n      </li>\n    <li class=\"nav-item\">\n        <a routerLink=\"contacts\" class=\"nav-link\" routerLinkActive=\"active\">Contact List</a>\n    </li>\n    <li class=\"nav-item\">\n        <a routerLink=\"add\" class=\"nav-link\" routerLinkActive=\"active\">Add Contact</a>\n    </li>\n  </ul>\n</nav>\n<div class=\"container\">\n  <br>\n  <h2 style=\"text-align: center;\">{{title}}</h2>\n  <hr>  \n  <div class=\"card\">\n    <div class=\"card-body\">\n  <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>\n\n<footer class=\"footer\">\n  <div class=\"container\">\n      <span>(https://www.javaguides.net/2019/06/angular-8-crud-example-tutorial.html)</span>\n  </div>\n</footer>\n"
 
 /***/ }),
 
@@ -67,6 +67,17 @@ module.exports = "<h3>Create Contact</h3>\n<div [hidden]=\"submitted\" style=\"w
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/imconfig-details/imconfig-details.component.html":
+/*!********************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/imconfig-details/imconfig-details.component.html ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-sm\">\n      <label><b>IP Address: </b></label> {{imconfig.ip}}\n    </div>\n    <div class=\"col-sm\">\n      <label><b>HostName: </b></label> {{imconfig.hostname}}\n    </div>\n    <div class=\"col-sm\">\n      <label><b>OS: </b></label> {{imconfig.os}} ({{imconfig.arch}})\n    </div>\n  </div>\n</div>\n<hr />\n<div *ngIf=\"imconfig\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"col-sm\">\n        <label><b>Free Physical Memory Size: </b></label> {{imconfig.freePhysicalMemorySize}}\n      </div>\n      <div class=\"col-sm\">\n        <label><b>Free Swap Space Size: </b></label> {{imconfig.freeSwapSpaceSize}}\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-sm\">\n        <label><b>System Cpu Load: </b></label> {{imconfig.systemCpuLoad}}\n      </div>\n      <div class=\"col-sm\">\n        <label><b>Total Physical Memory Size: </b></label> {{imconfig.totalPhysicalMemorySize}}\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-sm\">\n        <label><b>Total Swap Space Size: </b></label> {{imconfig.totalSwapSpaceSize}}\n      </div>\n      <div class=\"col-sm\">\n        <label><b>Process Cpu Load: </b></label> {{imconfig.processCpuLoad}}\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-sm\">\n        <label><b>Available Processors: </b></label> {{imconfig.availableProcessors}}\n      </div>\n      <div class=\"col-sm\">\n        <label><b>System Load Average: </b></label> {{imconfig.systemLoadAverage}}\n      </div>\n    </div>\n    <label><b>Feature(s): </b> </label>\n    <div class=\"row\">\n      \n      <div class=\"col-sm\">\n        <ul>\n          <ol  *ngFor=\"let f of imconfig.feature\"> {{f.name}} - {{f.status}}</ol>\n        </ul>\n      </div>\n    </div>\n  </div>\n\n</div>\n\n<br>"
+
+/***/ }),
+
 /***/ "./src/app/app-routing.module.ts":
 /*!***************************************!*\
   !*** ./src/app/app-routing.module.ts ***!
@@ -83,6 +94,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contact_detail_contact_detail_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contact-detail/contact-detail.component */ "./src/app/contact-detail/contact-detail.component.ts");
 /* harmony import */ var _create_contact_create_contact_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./create-contact/create-contact.component */ "./src/app/create-contact/create-contact.component.ts");
 /* harmony import */ var _contact_list_contact_list_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./contact-list/contact-list.component */ "./src/app/contact-list/contact-list.component.ts");
+/* harmony import */ var _imconfig_details_imconfig_details_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./imconfig-details/imconfig-details.component */ "./src/app/imconfig-details/imconfig-details.component.ts");
+
 
 
 
@@ -90,10 +103,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
-    { path: '', redirectTo: 'contact', pathMatch: 'full' },
+    { path: '', redirectTo: 'imconfigs', pathMatch: 'full' },
     { path: 'contacts', component: _contact_list_contact_list_component__WEBPACK_IMPORTED_MODULE_5__["ContactListComponent"] },
     { path: 'add', component: _create_contact_create_contact_component__WEBPACK_IMPORTED_MODULE_4__["CreateContactComponent"] },
-    { path: 'details/:id', component: _contact_detail_contact_detail_component__WEBPACK_IMPORTED_MODULE_3__["ContactDetailComponent"] }
+    { path: 'details/:id', component: _contact_detail_contact_detail_component__WEBPACK_IMPORTED_MODULE_3__["ContactDetailComponent"] },
+    { path: 'imconfigs', component: _imconfig_details_imconfig_details_component__WEBPACK_IMPORTED_MODULE_6__["ImconfigDetailsComponent"] }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -170,6 +184,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contact_detail_contact_detail_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./contact-detail/contact-detail.component */ "./src/app/contact-detail/contact-detail.component.ts");
 /* harmony import */ var _contact_list_contact_list_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./contact-list/contact-list.component */ "./src/app/contact-list/contact-list.component.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! angular-datatables */ "./node_modules/angular-datatables/index.js");
+/* harmony import */ var _imconfig_details_imconfig_details_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./imconfig-details/imconfig-details.component */ "./src/app/imconfig-details/imconfig-details.component.ts");
+
+
 
 
 
@@ -188,13 +206,15 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
             _create_contact_create_contact_component__WEBPACK_IMPORTED_MODULE_6__["CreateContactComponent"],
             _contact_detail_contact_detail_component__WEBPACK_IMPORTED_MODULE_7__["ContactDetailComponent"],
-            _contact_list_contact_list_component__WEBPACK_IMPORTED_MODULE_8__["ContactListComponent"]
+            _contact_list_contact_list_component__WEBPACK_IMPORTED_MODULE_8__["ContactListComponent"],
+            _imconfig_details_imconfig_details_component__WEBPACK_IMPORTED_MODULE_11__["ImconfigDetailsComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
             _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"]
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"],
+            angular_datatables__WEBPACK_IMPORTED_MODULE_10__["DataTablesModule"]
         ],
         providers: [],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
@@ -473,6 +493,123 @@ CreateContactComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     })
 ], CreateContactComponent);
 
+
+
+/***/ }),
+
+/***/ "./src/app/imconfig-details/imconfig-details.component.css":
+/*!*****************************************************************!*\
+  !*** ./src/app/imconfig-details/imconfig-details.component.css ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2ltY29uZmlnLWRldGFpbHMvaW1jb25maWctZGV0YWlscy5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/imconfig-details/imconfig-details.component.ts":
+/*!****************************************************************!*\
+  !*** ./src/app/imconfig-details/imconfig-details.component.ts ***!
+  \****************************************************************/
+/*! exports provided: ImconfigDetailsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImconfigDetailsComponent", function() { return ImconfigDetailsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _imconfig_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../imconfig.service */ "./src/app/imconfig.service.ts");
+/* harmony import */ var _imconfig__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../imconfig */ "./src/app/imconfig.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
+
+
+
+let ImconfigDetailsComponent = class ImconfigDetailsComponent {
+    constructor(route, router, imconfigService) {
+        this.route = route;
+        this.router = router;
+        this.imconfigService = imconfigService;
+    }
+    ngOnInit() {
+        this.imconfig = new _imconfig__WEBPACK_IMPORTED_MODULE_3__["ImConfig"]();
+        this.imconfigService.getIMConfig()
+            .subscribe(data => {
+            console.log(data);
+            this.imconfig = data;
+        }, error => console.log(error));
+    }
+};
+ImconfigDetailsComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _imconfig_service__WEBPACK_IMPORTED_MODULE_2__["IMConfigService"] }
+];
+ImconfigDetailsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-imconfig-details',
+        template: __webpack_require__(/*! raw-loader!./imconfig-details.component.html */ "./node_modules/raw-loader/index.js!./src/app/imconfig-details/imconfig-details.component.html"),
+        styles: [__webpack_require__(/*! ./imconfig-details.component.css */ "./src/app/imconfig-details/imconfig-details.component.css")]
+    })
+], ImconfigDetailsComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/imconfig.service.ts":
+/*!*************************************!*\
+  !*** ./src/app/imconfig.service.ts ***!
+  \*************************************/
+/*! exports provided: IMConfigService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IMConfigService", function() { return IMConfigService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+
+
+
+let IMConfigService = class IMConfigService {
+    constructor(http) {
+        this.http = http;
+        this.baseUrl = 'http://localhost:4000/common/basic';
+    }
+    getIMConfig() {
+        return this.http.get(`${this.baseUrl}`);
+    }
+};
+IMConfigService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
+IMConfigService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], IMConfigService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/imconfig.ts":
+/*!*****************************!*\
+  !*** ./src/app/imconfig.ts ***!
+  \*****************************/
+/*! exports provided: ImConfig */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImConfig", function() { return ImConfig; });
+class ImConfig {
+}
 
 
 /***/ }),
