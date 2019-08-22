@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sample.im.model.Contact;
 import com.sample.im.repository.ContactRepository;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping({"/contacts"})
+@Api(value="contacts", description="Operations pertaining to contacts")
 public class ContactController {
 
     private ContactRepository repository;

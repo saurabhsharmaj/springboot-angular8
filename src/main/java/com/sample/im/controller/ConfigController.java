@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sample.im.model.Config;
 import com.sample.im.repository.ConfigRepository;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping({"/config"})
+@Api(value="config", description="Operations pertaining to configuration")
 public class ConfigController {
 
 	@Autowired
