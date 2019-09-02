@@ -349,7 +349,7 @@ module.exports = "<p>contact-list works!</p>\n<div class=\"panel panel-primary\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>cpu-line-chart works!</p>\n<google-chart #chart  \n   [title]=\"title\"  \n   [type]=\"type\"  \n   [data]=\"data\"  \n   [columnNames]=\"columnNames\"  \n   [options]=\"options\"  \n   [width]=\"width\"  \n   [height]=\"height\">  \n</google-chart>"
+module.exports = "<p>cpu-line-chart works!</p>\n<rg-gauge-chart\n    [canvasWidth]=\"canvasWidth\"\n    [needleValue]=\"needleValue\"\n    [centralLabel]=\"centralLabel\"\n    [options]=\"options\"\n    [name]=\"name\"\n    [bottomLabel]=\"bottomLabel\"></rg-gauge-chart>\n    \n<google-chart #chart  \n   [title]=\"title\"  \n   [type]=\"type\"  \n   [data]=\"data\"  \n   [columnNames]=\"columnNames\"  \n   [options]=\"options\"  \n   [width]=\"width\"  \n   [height]=\"height\">  \n</google-chart>"
 
 /***/ }),
 
@@ -807,10 +807,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CpuLineChartComponent", function() { return CpuLineChartComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _imconfig_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../imconfig.service */ "./src/app/imconfig.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
+
+
 
 
 var CpuLineChartComponent = /** @class */ (function () {
-    function CpuLineChartComponent() {
+    function CpuLineChartComponent(route, router, imconfigService) {
+        this.route = route;
+        this.router = router;
+        this.imconfigService = imconfigService;
+        this.canvasWidth = 300;
+        this.needleValue = 65;
+        this.centralLabel = '';
+        this.name = 'CPU Load';
+        this.bottomLabel = '65';
+        this.options = {
+            hasNeedle: true,
+            needleColor: 'gray',
+            needleUpdateSpeed: 1000,
+            arcColors: ['rgb(44, 151, 222)', 'lightgray'],
+            arcDelimiters: [30],
+            rangeLabel: ['0', '100'],
+            needleStartValue: 10,
+        };
         this.title = 'CPU Report';
         this.type = 'LineChart';
         this.data = [
@@ -821,25 +844,30 @@ var CpuLineChartComponent = /** @class */ (function () {
             ["2018", 600]
         ];
         this.columnNames = ['Year', 'India'];
-        this.options = {};
         this.width = 600;
         this.height = 400;
-        this.lineChartData = [
-            { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-        ];
-        this.lineChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-        this.lineChartColors = [
-            {
-                borderColor: 'black',
-                backgroundColor: 'rgba(255,0,0,0.3)',
-            },
-        ];
-        this.lineChartLegend = true;
-        this.lineChartType = 'line';
-        this.lineChartPlugins = [];
     }
     CpuLineChartComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["timer"])(0, 5000).pipe().subscribe(function (data) {
+            _this.reloadData();
+        });
     };
+    CpuLineChartComponent.prototype.reloadData = function () {
+        var _this = this;
+        this.imconfigService.getCPUValue().subscribe(function (data) {
+            console.log(data);
+            _this.needleValue = data;
+            _this.bottomLabel = data;
+            _this.options.arcDelimiters = [data];
+            _this.options.needleStartValue = data;
+        }, function (error) { return console.log(error); });
+    };
+    CpuLineChartComponent.ctorParameters = function () { return [
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+        { type: _imconfig_service__WEBPACK_IMPORTED_MODULE_3__["IMConfigService"] }
+    ]; };
     CpuLineChartComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-cpu-line-chart',
@@ -1014,10 +1042,13 @@ __webpack_require__.r(__webpack_exports__);
 var IMConfigService = /** @class */ (function () {
     function IMConfigService(http) {
         this.http = http;
-        this.baseUrl = 'http://localhost:4000/common/basic';
+        this.baseUrl = 'http://localhost:4000/common';
     }
     IMConfigService.prototype.getIMConfig = function () {
-        return this.http.get("" + this.baseUrl);
+        return this.http.get(this.baseUrl + "+'/basic'");
+    };
+    IMConfigService.prototype.getCPUValue = function () {
+        return this.http.get("" + (this.baseUrl + '/cpuload'));
     };
     IMConfigService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
