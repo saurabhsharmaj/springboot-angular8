@@ -1,7 +1,5 @@
 package com.sample.im.controller;
 
-import java.text.DecimalFormat;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +28,7 @@ public class CommonController {
 	
 	@Autowired
 	Metrics metrics;
-	
-	@Autowired
-	private FeatureRepository featureRepository;
-				
+					
 	@ApiOperation(value = "View a list of available Basic Information", response = BasicInfo.class)
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successfully retrieved list"),
@@ -43,24 +38,7 @@ public class CommonController {
 	})
 	@GetMapping(path = {"/basic"})
 	public ResponseEntity<BasicInfo> getBasicInfo() throws Exception{
-		BasicInfo bs = new BasicInfo();
-		bs.setIp(utils.getIpAddress());
-		bs.setHostname(utils.getHostName());
-		bs.setOs(utils.getOS());
-		bs.setArch(utils.getArchType());
-		bs.setFeature(featureRepository.findAll());
-		bs.setFreePhysicalMemorySize(metrics.getValue("FreePhysicalMemorySize"));		  
-		bs.setFreeSwapSpaceSize(metrics.getValue("FreeSwapSpaceSize"));		  
-		bs.setProcessCpuTime(metrics.getValue("ProcessCpuTime"));		 
-		bs.setSystemCpuLoad(metrics.getValue("SystemCpuLoad"));		  
-		bs.setTotalPhysicalMemorySize(metrics.getValue("TotalPhysicalMemorySize"));		  
-		bs.setTotalSwapSpaceSize(metrics.getValue("TotalSwapSpaceSize"));
-		bs.setProcessCpuLoad(metrics.getValue("ProcessCpuLoad"));		  
-		bs.setName(metrics.getValue("Name"));		  
-		bs.setVersion(metrics.getValue("Version"));		  
-		bs.setAvailableProcessors(metrics.getValue("AvailableProcessors"));		  
-		bs.setSystemLoadAverage(metrics.getValue("SystemLoadAverage"));
-		
+		BasicInfo bs = metrics.getBasicInfo();		
 		return new ResponseEntity<BasicInfo>(bs,HttpStatus.OK);
 	}
 	
