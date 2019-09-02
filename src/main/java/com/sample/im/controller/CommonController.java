@@ -1,5 +1,7 @@
 package com.sample.im.controller;
 
+import java.text.DecimalFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +33,7 @@ public class CommonController {
 	
 	@Autowired
 	private FeatureRepository featureRepository;
-	
+				
 	@ApiOperation(value = "View a list of available Basic Information", response = BasicInfo.class)
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successfully retrieved list"),
@@ -84,7 +86,9 @@ public class CommonController {
 	
 	@GetMapping(path = {"/cpuload"})
 	public ResponseEntity<Double> getCPULoad() {
-		return new ResponseEntity<Double>(metrics.getProcessCpuLoad(),HttpStatus.OK);
+		Double value = metrics.getProcessCpuLoad();
+		
+		return new ResponseEntity<Double>(value,HttpStatus.OK);
 	}
 	
 	@GetMapping(path = {"/metric/{key}"})
