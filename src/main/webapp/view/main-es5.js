@@ -1045,7 +1045,7 @@ var IMConfigService = /** @class */ (function () {
         this.baseUrl = 'http://localhost:4000/common';
     }
     IMConfigService.prototype.getIMConfig = function () {
-        return this.http.get(this.baseUrl + "+'/basic'");
+        return this.http.get("" + (this.baseUrl + '/basic'));
     };
     IMConfigService.prototype.getCPUValue = function () {
         return this.http.get("" + (this.baseUrl + '/cpuload'));

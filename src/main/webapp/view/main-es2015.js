@@ -1023,7 +1023,7 @@ let IMConfigService = class IMConfigService {
         this.baseUrl = 'http://localhost:4000/common';
     }
     getIMConfig() {
-        return this.http.get(`${this.baseUrl}+'/basic'`);
+        return this.http.get(`${this.baseUrl + '/basic'}`);
     }
     getCPUValue() {
         return this.http.get(`${this.baseUrl + '/cpuload'}`);
