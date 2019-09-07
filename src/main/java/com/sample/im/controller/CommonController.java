@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sample.im.common.IMUtils;
 import com.sample.im.common.Metrics;
 import com.sample.im.model.value.BasicInfo;
-import com.sample.im.repository.FeatureRepository;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -65,7 +64,6 @@ public class CommonController {
 	@GetMapping(path = {"/cpuload"})
 	public ResponseEntity<Double> getCPULoad() {
 		Double value = metrics.getProcessCpuLoad();
-		
 		return new ResponseEntity<Double>(value,HttpStatus.OK);
 	}
 	

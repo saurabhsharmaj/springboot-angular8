@@ -9,12 +9,8 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.management.Attribute;
 import javax.management.AttributeList;
-import javax.management.InstanceNotFoundException;
-import javax.management.MBeanAttributeInfo;
-import javax.management.MBeanInfo;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
-import javax.management.ReflectionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -56,10 +52,10 @@ public class Metrics {
 	public Double getProcessCpuLoad() {
 		try {
 			
-			AttributeList list = mbs.getAttributes(name, new String[] { "ProcessCpuLoad" });
+			AttributeList list = mbs.getAttributes(name, new String[] { "SystemCpuLoad" });
 			Double value = Optional.ofNullable(list).map(l -> l.isEmpty() ? null : l).map(List::iterator).map(Iterator::next)
 					.map(Attribute.class::cast).map(Attribute::getValue).map(Double.class::cast).orElse(null);
-			return Double.parseDouble(df.format(value*1000));
+			return Double.parseDouble(df.format(value*1000))/10;
 
 		} catch (Exception ex) {
 			return null;
